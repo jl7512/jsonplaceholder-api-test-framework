@@ -41,6 +41,23 @@ public class CommentsStepDefs {
 		testContext.set(createCommentOnPostResponse);
 	}
 
+	@When("I create a comment")
+	public void i_create_a_comment(DataTable dataTable) {
+		Map<String, String> data = dataTable.asMaps().get(0);
+		String postId = data.get("postId");
+		String name = data.get("name");
+		String email = data.get("email");
+		String body = data.get("body");
+		
+		JsonObject payload = new JsonObject();
+		payload.addProperty("postId", postId);
+		payload.addProperty("name", name);
+		payload.addProperty("email", email);
+		payload.addProperty("body", body);
+		Response createCommentResponse = commentsAPI.createComment(payload);
+		testContext.set(createCommentResponse);
+	}
+	
 	@When("I fetch the comment with id {string}")
 	public void i_fetch_the_comment_with_id(String id) {
 		Response getCommentsResponse = commentsAPI.getCommentsById(id);

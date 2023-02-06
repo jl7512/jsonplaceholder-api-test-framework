@@ -15,6 +15,10 @@ public class CommentsAPI extends BaseAPI {
 		return post(BASE_ROUTE, payload);
 	}
 	
+	public Response createComment(JsonObject payload) {
+		return post(BASE_ROUTE, payload);
+	}
+	
 	public Response getCommentsById(String commentId) {
 		return get(BASE_ROUTE + commentId);
 	}
