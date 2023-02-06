@@ -81,7 +81,7 @@ Feature: Make posts
       | title  |
       | body   |
     And all the posts should have title "sunt aut facere repellat provident occaecati excepturi optio reprehenderit"
-    
+
   @posts10
   Scenario: Update fields on a post
     When I update the post with id "1" with the following
@@ -91,7 +91,7 @@ Feature: Make posts
     And the user id should be "9"
     Then the post title should be "UPDATED POST TITLE"
     And the post body should be "UPDATED POST BODY TEXT"
-    
+
   @posts11
   Scenario: Edit an entire post
     When I edit the post with id "1" with new details
@@ -101,10 +101,9 @@ Feature: Make posts
     And the user id should be "11"
     Then the post title should be "EDITED POST TITLE"
     And the post body should be "EDITED POST BODY TEXT"
-    
+
   @posts12
   Scenario: Delete a post
     When I delete the post with id "1"
     And I fetch the post with id "1"
     Then the post with id "1" should be deleted
-    
