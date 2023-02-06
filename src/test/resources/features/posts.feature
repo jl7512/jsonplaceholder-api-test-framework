@@ -19,3 +19,24 @@ Feature: Make posts
       | id | userId | title              | body                   |
       |    |      1 | CREATED POST TITLE | CREATED POST BODY TEXT |
     Then the request should fail
+
+  @posts3
+  Scenario: Should not be able to create a post with no user id
+    Given I create a post
+      | id | userId | title              | body                   |
+      |  1 |        | CREATED POST TITLE | CREATED POST BODY TEXT |
+    Then the request should fail
+
+  @posts4
+  Scenario: Should not be able to create a post with no title
+    Given I create a post
+      | id | userId | title | body                   |
+      |  1 |      1 |       | CREATED POST BODY TEXT |
+    Then the request should fail
+
+  @posts5
+  Scenario: Should not be able to create a post with no body
+    Given I create a post
+      | id | userId | title              | body |
+      |  1 |      1 | CREATED POST TITLE |      |
+    Then the request should fail
