@@ -18,4 +18,8 @@ public class PostsAPI extends BaseAPI {
 	public Response getPostById(String postId) {
 		return get(BASE_ROUTE + postId);
 	}
+	
+	public Response getAllPosts() {
+		return get(BASE_ROUTE);
+	}
 }

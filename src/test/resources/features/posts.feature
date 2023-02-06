@@ -40,3 +40,12 @@ Feature: Make posts
       | id | userId | title              | body |
       |  1 |      1 | CREATED POST TITLE |      |
     Then the request should fail
+
+  @posts6
+  Scenario: Get all posts
+    When I fetch all posts
+    Then all the posts should contain the following fields
+      | id     |
+      | userId |
+      | title  |
+      | body   |

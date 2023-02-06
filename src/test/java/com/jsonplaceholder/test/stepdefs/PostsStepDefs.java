@@ -1,6 +1,7 @@
 package com.jsonplaceholder.test.stepdefs;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
@@ -46,7 +47,13 @@ public class PostsStepDefs {
 		Response getPostByIdResponse = postsAPI.getPostById(postId);
 		testContext.set(getPostByIdResponse);
 	}
-
+	
+	@When("I fetch all posts")
+	public void i_fetch_all_posts() {
+		Response getAllPostsResponse = postsAPI.getAllPosts();
+		testContext.set(getAllPostsResponse);
+	}
+	
 	@Then("the post title should be {string}")
 	public void the_post_title_should_be(String expectedTitle) {
 		Response response = testContext.get();
@@ -71,5 +78,20 @@ public class PostsStepDefs {
 		int actualStatusCode = response.getStatusCode();
 		int expectedStatusCode = 400;
 		Assert.assertEquals(expectedStatusCode, actualStatusCode);
+	}
+	
+	@Then("all the posts should contain the following fields")
+	public void all_the_posts_should_contain_the_following_fields(DataTable dataTable) {
+		List<String> expectedFields = dataTable.asList();
+
+		Response response = testContext.get();
+		List<JsonObject> listOfPostJsonObjects = JsonUtils.getJsonObjectList(response);
+
+		listOfPostJsonObjects.forEach(postJsonObject -> {
+			expectedFields.forEach(expectedField -> {
+				boolean hasField = postJsonObject.has(expectedField);
+				Assert.assertTrue("Expected post to have field " + expectedField + "'", hasField);
+			});
+		});
 	}
 }
