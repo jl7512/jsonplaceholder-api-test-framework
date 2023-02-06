@@ -36,4 +36,8 @@ public class PostsAPI extends BaseAPI {
 	public Response patchPost(String postId, JsonObject payload) {
 		return patch(BASE_ROUTE + postId, payload);
 	}
+	
+	public Response putPost(String postId, JsonObject payload) {
+		return put(BASE_ROUTE + postId, payload);
+	}
 }

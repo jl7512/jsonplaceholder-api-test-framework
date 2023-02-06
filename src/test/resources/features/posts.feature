@@ -92,3 +92,13 @@ Feature: Make posts
     Then the post title should be "UPDATED POST TITLE"
     And the post body should be "UPDATED POST BODY TEXT"
     
+  @posts11
+  Scenario: Edit an entire post
+    When I edit the post with id "1" with new details
+      | userId | title             | body                  |
+      |     11 | EDITED POST TITLE | EDITED POST BODY TEXT |
+    And I fetch the post with id "1"
+    And the user id should be "11"
+    Then the post title should be "EDITED POST TITLE"
+    And the post body should be "EDITED POST BODY TEXT"
+    

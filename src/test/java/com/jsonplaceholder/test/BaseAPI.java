@@ -27,4 +27,8 @@ public class BaseAPI {
 	protected Response patch(String route, JsonObject jsonBody) {
 		return request.body(jsonBody).patch(route).then().extract().response();
 	}
+
+	protected Response put(String route, JsonObject jsonBody) {
+		return request.body(jsonBody).put(route).then().extract().response();
+	}
 }

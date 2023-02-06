@@ -81,6 +81,22 @@ public class PostsStepDefs {
 		testContext.set(patchPostResponse);
 	}
 	
+	@When("I edit the post with id {string} with new details")
+	public void i_edit_the_post_with_id_with_new_details(String id, DataTable dataTable) {
+		Map<String, String> data = dataTable.asMaps().get(0);
+		String userId = data.get("userId");
+		String title = data.get("title");
+		String body = data.get("body");
+
+		JsonObject payload = new JsonObject();
+		payload.addProperty("id", id);
+		payload.addProperty("userId", userId);
+		payload.addProperty("title", title);
+		payload.addProperty("body", body);
+		Response putPostResponse = postsAPI.putPost(id, payload);
+		testContext.set(putPostResponse);
+	}
+	
 	@Then("the post title should be {string}")
 	public void the_post_title_should_be(String expectedTitle) {
 		Response response = testContext.get();
