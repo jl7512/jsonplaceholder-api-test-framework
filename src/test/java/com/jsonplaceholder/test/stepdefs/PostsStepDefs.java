@@ -94,4 +94,24 @@ public class PostsStepDefs {
 			});
 		});
 	}
+
+	@Then("it should contain the following fields")
+	public void it_should_contain_the_following_fields(DataTable dataTable) {
+		List<String> expectedFields = dataTable.asList();
+
+		Response response = testContext.get();
+		JsonObject postJsonObject = JsonUtils.getJsonObject(response);
+
+		expectedFields.forEach(expectedField -> {
+			boolean hasField = postJsonObject.has(expectedField);
+			Assert.assertTrue("Expected to have field " + expectedField + "'", hasField);
+		});
+	}
+
+	@Then("the id should be {string}")
+	public void the_id_should_be(String expectedId) {
+		Response response = testContext.get();
+		String actualId = JsonUtils.getField(response, "id");
+		Assert.assertTrue("Expected: " + expectedId + " Actual: " + actualId, expectedId.equals(actualId));
+	}
 }

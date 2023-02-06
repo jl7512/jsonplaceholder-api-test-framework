@@ -49,3 +49,16 @@ Feature: Make posts
       | userId |
       | title  |
       | body   |
+
+  @posts7
+  Scenario: Get a post by id
+    When I fetch the post with id "1"
+    Then it should contain the following fields
+      | id     |
+      | userId |
+      | title  |
+      | body   |
+    And the id should be "1"
+    Then the post title should be "CREATED POST TITLE"
+    And the post body should be "CREATED POST BODY TEXT"
+    
