@@ -62,3 +62,13 @@ Feature: Make posts
     Then the post title should be "CREATED POST TITLE"
     And the post body should be "CREATED POST BODY TEXT"
     
+  @posts8
+  Scenario: Get all posts by user id
+    When I fetch all posts by a user with id "1"
+    Then all the posts should contain the following fields
+      | id     |
+      | userId |
+      | title  |
+      | body   |
+    And all the posts should have user id "1"
+    

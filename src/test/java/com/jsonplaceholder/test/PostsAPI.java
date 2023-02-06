@@ -6,6 +6,7 @@ import io.restassured.response.Response;
 
 public class PostsAPI extends BaseAPI {
 	private final String BASE_ROUTE = "posts/";
+	private final String GET_POSTS_BY_USER_ID_ROUTE = BASE_ROUTE + "?userId=";
 
 	public PostsAPI() {
 		super();
@@ -21,5 +22,9 @@ public class PostsAPI extends BaseAPI {
 	
 	public Response getAllPosts() {
 		return get(BASE_ROUTE);
+	}
+
+	public Response getAllPostsByUserId(String userId) {
+		return get(GET_POSTS_BY_USER_ID_ROUTE + userId);
 	}
 }
