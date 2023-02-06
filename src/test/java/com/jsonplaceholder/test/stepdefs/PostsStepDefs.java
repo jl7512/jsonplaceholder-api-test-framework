@@ -65,4 +65,11 @@ public class PostsStepDefs {
 		Assert.assertTrue(samePostBody);
 	}
 
+	@Then("the request should fail")
+	public void the_request_should_fail() {
+		Response response = testContext.get();
+		int actualStatusCode = response.getStatusCode();
+		int expectedStatusCode = 400;
+		Assert.assertEquals(expectedStatusCode, actualStatusCode);
+	}
 }

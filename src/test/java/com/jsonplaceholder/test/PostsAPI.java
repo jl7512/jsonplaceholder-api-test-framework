@@ -6,7 +6,7 @@ import io.restassured.response.Response;
 
 public class PostsAPI extends BaseAPI {
 	private final String BASE_ROUTE = "posts/";
-	
+
 	public PostsAPI() {
 		super();
 	}
@@ -14,7 +14,7 @@ public class PostsAPI extends BaseAPI {
 	public Response createPost(JsonObject payload) {
 		return post(BASE_ROUTE, payload);
 	}
-	
+
 	public Response getPostById(String postId) {
 		return get(BASE_ROUTE + postId);
 	}
