@@ -32,4 +32,8 @@ public class PostsAPI extends BaseAPI {
 	public Response getPostByTitle(String postTitle) {
 		return get(GET_POSTS_BY_POST_TITLE_ROUTE + postTitle);
 	}
+
+	public Response patchPost(String postId, JsonObject payload) {
+		return patch(BASE_ROUTE + postId, payload);
+	}
 }

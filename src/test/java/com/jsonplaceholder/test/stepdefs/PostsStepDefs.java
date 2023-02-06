@@ -66,6 +66,21 @@ public class PostsStepDefs {
 		testContext.set(getPostByTitleResponse);
 	}
 	
+	@When("I update the post with id {string} with the following")
+	public void i_update_the_post_with_id_with_the_following(String id, DataTable dataTable) {
+		Map<String, String> data = dataTable.asMaps().get(0);
+		String userId = data.get("userId");
+		String title = data.get("title");
+		String body = data.get("body");
+
+		JsonObject payload = new JsonObject();
+		payload.addProperty("userId", userId);
+		payload.addProperty("title", title);
+		payload.addProperty("body", body);
+		Response patchPostResponse = postsAPI.patchPost(id, payload);
+		testContext.set(patchPostResponse);
+	}
+	
 	@Then("the post title should be {string}")
 	public void the_post_title_should_be(String expectedTitle) {
 		Response response = testContext.get();
@@ -149,5 +164,13 @@ public class PostsStepDefs {
 			boolean sameTitle = expectedPostTitle.equals(actualPostTitle);
 			Assert.assertTrue("Expected the title of post to be " + expectedPostTitle, sameTitle);
 		});
+	}
+	
+	@Then("the user id should be {string}")
+	public void the_user_id_should_be(String expectedUserId) {
+		Response response = testContext.get();
+		String actualUserId = JsonUtils.getField(response, "userId");
+		Assert.assertTrue(response.asPrettyString() + "\n" + "Expected: " + expectedUserId + " Actual: " + actualUserId,
+				expectedUserId.equals(actualUserId));
 	}
 }

@@ -61,7 +61,7 @@ Feature: Make posts
     And the id should be "1"
     Then the post title should be "CREATED POST TITLE"
     And the post body should be "CREATED POST BODY TEXT"
-    
+
   @posts8
   Scenario: Get all posts by user id
     When I fetch all posts by a user with id "1"
@@ -71,7 +71,7 @@ Feature: Make posts
       | title  |
       | body   |
     And all the posts should have user id "1"
-    
+
   @posts9
   Scenario: Get post by title
     When I fetch all the posts with title "sunt aut facere repellat provident occaecati excepturi optio reprehenderit"
@@ -81,4 +81,14 @@ Feature: Make posts
       | title  |
       | body   |
     And all the posts should have title "sunt aut facere repellat provident occaecati excepturi optio reprehenderit"
+    
+  @posts10
+  Scenario: Update fields on a post
+    When I update the post with id "1" with the following
+      | userId | title              | body                   |
+      |      9 | UPDATED POST TITLE | UPDATED POST BODY TEXT |
+    And I fetch the post with id "1"
+    And the user id should be "9"
+    Then the post title should be "UPDATED POST TITLE"
+    And the post body should be "UPDATED POST BODY TEXT"
     
