@@ -16,4 +16,10 @@ Feature: Make comments on posts
     Then the comment should contain the following
       | postId | name              | email                            | body              |
       |      1 | TEST COMMENT NAME | testcomment.user@testcomment.com | test comment body |
-      
+
+  @comments2
+  Scenario: Should not be able to create a comment with no post id
+    When I create a comment
+      | postId | name | email              | body      |
+      |        | TEST | test.user@test.com | TEST BODY |
+    Then the request should fail
