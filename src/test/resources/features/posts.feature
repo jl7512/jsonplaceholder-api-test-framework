@@ -72,3 +72,13 @@ Feature: Make posts
       | body   |
     And all the posts should have user id "1"
     
+  @posts9
+  Scenario: Get post by title
+    When I fetch all the posts with title "sunt aut facere repellat provident occaecati excepturi optio reprehenderit"
+    Then all the posts should contain the following fields
+      | id     |
+      | userId |
+      | title  |
+      | body   |
+    And all the posts should have title "sunt aut facere repellat provident occaecati excepturi optio reprehenderit"
+    

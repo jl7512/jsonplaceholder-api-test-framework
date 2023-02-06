@@ -60,6 +60,12 @@ public class PostsStepDefs {
 		testContext.set(getAllPostsByUserIdResponse);
 	}
 	
+	@When("I fetch all the posts with title {string}")
+	public void i_fetch_all_the_posts_with_title(String postTitle) {
+		Response getPostByTitleResponse = postsAPI.getPostByTitle(postTitle);
+		testContext.set(getPostByTitleResponse);
+	}
+	
 	@Then("the post title should be {string}")
 	public void the_post_title_should_be(String expectedTitle) {
 		Response response = testContext.get();
@@ -130,6 +136,18 @@ public class PostsStepDefs {
 			String actualUserId = post.get("userId").getAsString();
 			boolean sameUserId = expectedUserId.equals(actualUserId);
 			Assert.assertTrue("Expected the userId of post to be " + expectedUserId, sameUserId);
+		});
+	}
+
+	@Then("all the posts should have title {string}")
+	public void all_the_posts_should_have_title(String expectedPostTitle) {
+		Response response = testContext.get();
+		List<JsonObject> listOfPostJsonObjects = JsonUtils.getJsonObjectList(response);
+
+		listOfPostJsonObjects.forEach(post -> {
+			String actualPostTitle = post.get("title").getAsString();
+			boolean sameTitle = expectedPostTitle.equals(actualPostTitle);
+			Assert.assertTrue("Expected the title of post to be " + expectedPostTitle, sameTitle);
 		});
 	}
 }
