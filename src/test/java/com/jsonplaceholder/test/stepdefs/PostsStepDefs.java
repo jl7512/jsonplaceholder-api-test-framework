@@ -120,14 +120,6 @@ public class PostsStepDefs {
 		boolean samePostBody = Arrays.equals(actualPostBodyCharacters, expectedPostBodyCharacters);
 		Assert.assertTrue(samePostBody);
 	}
-
-	@Then("the request should fail")
-	public void the_request_should_fail() {
-		Response response = testContext.get();
-		int actualStatusCode = response.getStatusCode();
-		int expectedStatusCode = 400;
-		Assert.assertEquals(expectedStatusCode, actualStatusCode);
-	}
 	
 	@Then("all the posts should contain the following fields")
 	public void all_the_posts_should_contain_the_following_fields(DataTable dataTable) {
