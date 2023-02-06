@@ -97,6 +97,12 @@ public class PostsStepDefs {
 		testContext.set(putPostResponse);
 	}
 	
+	@When("I delete the post with id {string}")
+	public void i_delete_the_post_with_id(String postId) {
+		Response deletePostWithIdResponse = postsAPI.deletePost(postId);
+		testContext.set(deletePostWithIdResponse);
+	}
+	
 	@Then("the post title should be {string}")
 	public void the_post_title_should_be(String expectedTitle) {
 		Response response = testContext.get();
@@ -188,5 +194,13 @@ public class PostsStepDefs {
 		String actualUserId = JsonUtils.getField(response, "userId");
 		Assert.assertTrue(response.asPrettyString() + "\n" + "Expected: " + expectedUserId + " Actual: " + actualUserId,
 				expectedUserId.equals(actualUserId));
+	}
+	
+	@Then("the post with id {string} should be deleted")
+	public void the_post_with_id_should_be_deleted(String postId) {
+		Response getPostResponse = testContext.get();
+		int actualStatusCode = getPostResponse.getStatusCode();
+		int expectedStatusCode = 404;
+		Assert.assertEquals(expectedStatusCode, actualStatusCode);
 	}
 }

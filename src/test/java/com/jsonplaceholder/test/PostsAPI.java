@@ -40,4 +40,8 @@ public class PostsAPI extends BaseAPI {
 	public Response putPost(String postId, JsonObject payload) {
 		return put(BASE_ROUTE + postId, payload);
 	}
+	
+	public Response deletePost(String postId) {
+		return delete(BASE_ROUTE + postId);
+	}
 }

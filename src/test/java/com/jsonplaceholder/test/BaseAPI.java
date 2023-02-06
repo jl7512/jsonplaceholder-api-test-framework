@@ -31,4 +31,8 @@ public class BaseAPI {
 	protected Response put(String route, JsonObject jsonBody) {
 		return request.body(jsonBody).put(route).then().extract().response();
 	}
+	
+	protected Response delete(String route) {
+		return request.delete(route).then().extract().response();
+	}
 }

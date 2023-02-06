@@ -102,3 +102,9 @@ Feature: Make posts
     Then the post title should be "EDITED POST TITLE"
     And the post body should be "EDITED POST BODY TEXT"
     
+  @posts12
+  Scenario: Delete a post
+    When I delete the post with id "1"
+    And I fetch the post with id "1"
+    Then the post with id "1" should be deleted
+    
